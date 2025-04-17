@@ -6,8 +6,8 @@ export interface Todo {
   title: string;
   completed: boolean;
   category: string;
+  desc: string;
 }
-
 interface TodoState {
   todos: Todo[];
   detail: Todo | null;

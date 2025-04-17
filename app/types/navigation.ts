@@ -1,7 +1,7 @@
 // app/types/navigation.ts
 export type HomeStackParamList = {
   HomeScreen: undefined | { screen: 'HomeScreen' };
-  HomeDetail: undefined;
+  DetailTodo: undefined;
 };
 
 export type SearchStackParamList = {

@@ -124,7 +124,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   tabBarCustom: {
-    position: 'absolute',
     bottom: 0,
     left: 20,
     right: 20,

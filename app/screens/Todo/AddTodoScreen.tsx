@@ -1,44 +1,31 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   View,
   Text,
   TextInput,
   TouchableOpacity,
-  Alert,
   StyleSheet,
 } from 'react-native';
 import {useForm, Controller, SubmitHandler} from 'react-hook-form';
 import Colors from '../../constants/colors';
 import {Picker} from '@react-native-picker/picker';
-import {useDispatch} from 'react-redux';
-import {addTodo} from '../../store/todoSlice';
-import {useNavigation} from '@react-navigation/native';
+import {addTodo, updateTodo} from '../../store/todoSlice';
+import {useNavigation, useRoute, RouteProp} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {HomeStackParamList} from '../../types/navigation';
-
-const tag = [
-  {
-    id: 1,
-    category: 'design',
-  },
-  {
-    id: 2,
-    category: 'meeting',
-  },
-  {
-    id: 3,
-    category: 'research',
-  },
-  {
-    id: 4,
-    category: 'development',
-  },
-];
+import {
+  AddToDoStackParamList,
+  HomeStackParamList,
+} from '../../types/navigation';
+import {useDispatch, useSelector} from 'react-redux';
+import Categories from '../../constants/categories';
+import OutlineButton from '../../components/OutlineButton';
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   HomeStackParamList,
   'HomeScreen'
 >;
+
+type AddTodoRouteProp = RouteProp<AddToDoStackParamList, 'AddToDoScreen'>;
 
 type FormData = {
   title: string;
@@ -49,6 +36,9 @@ type FormData = {
 const AddTodoScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation<HomeScreenNavigationProp>();
+  const todos = useSelector((state: any) => state.todoList.todos);
+  const route = useRoute<AddTodoRouteProp>();
+  const {id} = route.params ?? {};
   const {
     control,
     handleSubmit,
@@ -56,12 +46,35 @@ const AddTodoScreen = () => {
     reset,
   } = useForm<FormData>();
 
+  useEffect(() => {
+    if (id) {
+      console.log('id param', id);
+      const selected = todos.find((item: any) => item.id === id);
+      if (selected) {
+        reset({
+          title: selected.title,
+          category: selected.category,
+          desc: selected.desc,
+        });
+      }
+    }
+  }, [route.params]);
+
   const onSubmit: SubmitHandler<FormData> = data => {
-    dispatch(
-      addTodo({title: data.title, desc: data.desc, category: data.category}),
-    );
-    reset();
-    navigation.navigate("Home", {screen: 'HomeScreen'});
+    if (id) {
+      dispatch(updateTodo({...data, id}));
+    } else {
+      dispatch(
+        addTodo({title: data.title, desc: data.desc, category: data.category}),
+      );
+    }
+    reset({
+      title: '',
+      category: '',
+      desc: '',
+    });
+    navigation.setParams({id: undefined});
+    navigation.navigate('Home', {screen: 'HomeScreen'});
   };
 
   return (
@@ -106,7 +119,7 @@ const AddTodoScreen = () => {
                 onValueChange={onChange}
                 style={styles.picker}>
                 <Picker.Item label="-- Select Category --" value="" />
-                {tag.map(item => (
+                {Categories.map(item => (
                   <Picker.Item
                     key={item.id}
                     label={item.category}
@@ -150,9 +163,17 @@ const AddTodoScreen = () => {
         )}
       />
 
-      <TouchableOpacity style={styles.button} onPress={handleSubmit(onSubmit)}>
-        <Text style={styles.buttonText}>Create Task</Text>
-      </TouchableOpacity>
+      <View
+        style={styles.buttonWrapper}>
+        <OutlineButton title="Cancel" onPress={() => navigation.goBack()} />
+        <TouchableOpacity
+          style={styles.button}
+          onPress={handleSubmit(onSubmit)}>
+          <Text style={styles.buttonText}>
+            {id ? 'Update Task' : 'Create Task'}
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -197,5 +218,10 @@ const styles = StyleSheet.create({
     height: 55,
     fontSize: 18,
     marginLeft: 8,
+  },
+  buttonWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 20,
   },
 });

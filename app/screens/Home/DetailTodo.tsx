@@ -10,10 +10,19 @@ import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../store';
 import {updateTodo} from '../../store/todoSlice';
 import Colors from '../../constants/colors';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, CompositeNavigationProp} from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { RootTabParamList } from '../../types/navigation';
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+type TodoTabNavProp = CompositeNavigationProp<
+  BottomTabNavigationProp<RootTabParamList, 'Todo'>,
+  NativeStackNavigationProp<RootTabParamList>
+>;
 
 const DetailTodo = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<TodoTabNavProp>();
   const todoDetail = useSelector((state: RootState) => state.todoList.detail);
   const dispatch = useDispatch();
   const [completed, setCompleted] = useState(todoDetail?.completed || false);
@@ -36,6 +45,30 @@ const DetailTodo = () => {
       <Text style={styles.title}>Detail Todo</Text>
 
       <View style={styles.card}>
+        <View
+          style={{
+            justifyContent: 'center',
+            alignItems: 'flex-end',
+            paddingRight: 10,
+          }}>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate('Todo', {
+                screen: 'AddToDoScreen',
+                params: {id: todoDetail.id},
+              })
+            }
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}>
+            <Text style={{color: Colors.danger, fontSize: 16, paddingRight: 3}}>
+              Edit
+            </Text>
+            <Icon name={'create'} color={Colors.danger} size={20} />
+          </TouchableOpacity>
+        </View>
         <Text style={styles.label}>Title:</Text>
         <Text style={styles.value}>{todoDetail.title}</Text>
 
@@ -46,6 +79,7 @@ const DetailTodo = () => {
         <Text style={styles.value}>{todoDetail.desc}</Text>
 
         <Text style={styles.label}>Status:</Text>
+
         <View style={styles.radioGroup}>
           <Pressable
             style={styles.radioItem}

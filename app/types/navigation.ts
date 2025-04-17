@@ -1,7 +1,7 @@
 // app/types/navigation.ts
 export type HomeStackParamList = {
-  HomeScreen: undefined | { screen: 'HomeScreen' };
-  DetailTodo: undefined;
+  HomeScreen: undefined | {screen: 'HomeScreen'; id: string};
+  DetailTodo: {id?: string};
 };
 
 export type SearchStackParamList = {
@@ -9,12 +9,20 @@ export type SearchStackParamList = {
   SearchDetail: undefined;
 };
 
-export type PostStackParamList = {
-  PostScreen: undefined;
+export type AddToDoStackParamList = {
+  AddToDoScreen: undefined | {screen: 'AddToDoScreen'; id: string};
   PostDetail: undefined;
 };
 
 export type ProfileStackParamList = {
   ProfileScreen: undefined;
   ProfileDetail: undefined;
+};
+
+export type RootTabParamList = {
+  Home: undefined;
+  Todo: {
+    screen: keyof AddToDoStackParamList;
+    params?: AddToDoStackParamList[keyof AddToDoStackParamList];
+  };
 };

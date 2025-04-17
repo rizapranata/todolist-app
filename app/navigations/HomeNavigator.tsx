@@ -21,7 +21,7 @@ const HomeNavigator = () => {
       />
       <Stack.Screen
         name="DetailTodo"
-        options={{title: 'Detail To Do', tabBarStyle: { display: 'none' }}}
+        options={{title: 'Detail To Do'}}
         component={DetailTodo}
       />
     </Stack.Navigator>

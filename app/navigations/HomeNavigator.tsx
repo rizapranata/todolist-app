@@ -1,7 +1,7 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from '../screens/Home/HomeScreen';
-import HomeDetailScreen from '../screens/Home/HomeDetailScreen';
+import DetailTodo from '../screens/Home/DetailTodo';
 
 const Stack = createNativeStackNavigator();
 
@@ -9,7 +9,6 @@ const HomeNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerTitleAlign: 'center',
         headerShadowVisible: false,
       }}>
       <Stack.Screen
@@ -17,14 +16,13 @@ const HomeNavigator = () => {
         options={{
           title: 'Home Screen',
           headerTitleAlign: 'center',
-          headerShadowVisible: false,
         }}
         component={HomeScreen}
       />
       <Stack.Screen
-        name="HomeDetail"
+        name="DetailTodo"
         options={{title: 'Detail To Do'}}
-        component={HomeDetailScreen}
+        component={DetailTodo}
       />
     </Stack.Navigator>
   );

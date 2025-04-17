@@ -69,7 +69,7 @@ const AddTodoScreen = () => {
       <Controller
         control={control}
         name="title"
-        rules={{required: 'Task name not empty!'}}
+        rules={{required: 'Task name cannot be empty!'}}
         render={({field: {onChange, onBlur, value}}) => (
           <View style={styles.inputContainer}>
             <Text
@@ -126,7 +126,7 @@ const AddTodoScreen = () => {
         control={control}
         name="desc"
         rules={{
-          required: 'Description not empty!',
+          required: 'Description cannot be empty!',
         }}
         render={({field: {onChange, onBlur, value}}) => (
           <View style={styles.inputContainer}>

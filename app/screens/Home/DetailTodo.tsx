@@ -1,19 +1,24 @@
 // HomeDetailScreen.tsx
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 
-const HomeDetailScreen = () => {
+const DetailTodo = () => {
   const todo = useSelector((state: RootState) => state.todoList.detail);
 
   console.log('todossss', todo);
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text>Detail: {todo?.title}</Text>
     </View>
   );
 };
 
-export default HomeDetailScreen;
+export default DetailTodo;
+
+const styles = StyleSheet.create({
+  container: {flex: 1, backgroundColor: '#fff'},
+  text: {fontSize: 20, color: 'black'},
+});

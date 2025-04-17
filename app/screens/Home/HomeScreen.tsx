@@ -8,40 +8,13 @@ import {
   Image,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {setDetailData} from '../../store/todoSlice';
+import {deleteTodo, setDetailData} from '../../store/todoSlice';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {HomeStackParamList} from '../../types/navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Colors from '../../constants/colors';
-
-// src/constants/dummyTodos.ts
-export const dummyTodos = [
-  {
-    id: '1',
-    title: 'UI Design',
-    time: '09:00 AM - 11:00 AM',
-    completed: false,
-  },
-  {
-    id: '2',
-    title: 'Web Development',
-    time: '11:30 AM - 12:30 PM',
-    completed: true,
-  },
-  {
-    id: '3',
-    title: 'Office Meeting',
-    time: '02:00 PM - 03:00 PM',
-    completed: false,
-  },
-  {
-    id: '4',
-    title: 'Dashboard Design',
-    time: '03:30 PM - 05:00 PM',
-    completed: false,
-  },
-];
+import TaskItem from '../../components/TaskItem';
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   HomeStackParamList,
@@ -55,8 +28,12 @@ const HomeScreen = () => {
 
   const goToDetail = (id: string) => {
     dispatch(setDetailData(id));
-    navigation.navigate('HomeDetail');
+    navigation.navigate('DetailTodo');
   };
+
+  const handleDelete = (id: string) => {
+    dispatch(deleteTodo(id));
+  }
 
   return (
     <View style={styles.container}>
@@ -73,34 +50,30 @@ const HomeScreen = () => {
         </View>
         <Text style={styles.title}>Today's Task</Text>
       </View>
-
-      <FlatList
-        data={todos}
-        keyExtractor={item => item.id}
-        renderItem={({item}) => (
-          <TouchableOpacity
-            style={styles.taskItem}
-            onPress={() => goToDetail(item.id)}>
-            <View style={styles.iconWrapper}>
-              <Icon
-                name="checkmark-done-circle"
-                size={30}
-                color={item.completed ? Colors.primary : '#aaa'}
-              />
+      <View style={{flex: 1}}>
+        <FlatList
+          data={todos}
+          keyExtractor={item => item.id}
+          renderItem={({item}) => (
+            <TaskItem
+              id={item.id}
+              title={item.title}
+              category={item.category}
+              completed={item.completed}
+              onPress={goToDetail}
+              onDelete={handleDelete}
+            />
+          )}
+          contentContainerStyle={{paddingBottom: 100}}
+          ListEmptyComponent={() => (
+            <View style={{padding: 40, alignItems: 'center'}}>
+              <Text style={{color: '#aaa', fontSize: 18}}>
+                No tasks available.
+              </Text>
             </View>
-            <View style={styles.info}>
-              <Text style={styles.taskTitle}>{item.title}</Text>
-              <Text style={styles.taskTime}>{item.category}</Text>
-            </View>
-            <Icon name="chevron-forward" size={20} color="#aaa" />
-          </TouchableOpacity>
-        )}
-        ListEmptyComponent={() => (
-          <View style={{padding: 40, alignItems: 'center'}}>
-            <Text style={{color: '#aaa', fontSize: 18}}>No tasks available.</Text>
-          </View>
-        )}
-      />
+          )}
+        />
+      </View>
     </View>
   );
 };
@@ -112,51 +85,11 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   header: {
-    // flexDirection: 'row',
-    // justifyContent: 'space-between',
     marginBottom: 16,
   },
   title: {
     fontSize: 20,
     fontWeight: 'bold',
-  },
-  seeAll: {
-    fontSize: 14,
-    color: '#4e74f9',
-  },
-  taskItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#f8f9ff',
-    padding: 16,
-    borderRadius: 16,
-    marginBottom: 12,
-    shadowColor: '#000',
-    shadowOpacity: 0.03,
-    shadowRadius: 4,
-    elevation: 2,
-  },
-  iconWrapper: {
-    width: 40,
-    height: 40,
-    marginRight: 12,
-  },
-  icon: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'contain',
-  },
-  info: {
-    flex: 1,
-  },
-  taskTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-    marginBottom: 4,
-  },
-  taskTime: {
-    fontSize: 13,
-    color: '#888',
   },
 });
 

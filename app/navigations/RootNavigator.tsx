@@ -128,8 +128,8 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 20,
     right: 20,
-    elevation: 0,
-    backgroundColor: '#fff',
+    elevation: 1,
+    backgroundColor: Colors.white,
     paddingTop: 10,
     height: 65,
     ...Platform.select({

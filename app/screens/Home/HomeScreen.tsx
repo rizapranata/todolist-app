@@ -15,6 +15,7 @@ import {HomeStackParamList} from '../../types/navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Colors from '../../constants/colors';
 import TaskItem from '../../components/TaskItem';
+import SearchBar from '../../components/SearchBar';
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   HomeStackParamList,
@@ -33,7 +34,7 @@ const HomeScreen = () => {
 
   const handleDelete = (id: string) => {
     dispatch(deleteTodo(id));
-  }
+  };
 
   return (
     <View style={styles.container}>

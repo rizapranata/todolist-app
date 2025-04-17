@@ -73,7 +73,6 @@ const AddTodoScreen = () => {
       category: '',
       desc: '',
     });
-    navigation.setParams({id: undefined});
     navigation.navigate('Home', {screen: 'HomeScreen'});
   };
 

@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {setDetailData} from '../../store/todoSlice';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
@@ -51,9 +51,10 @@ type HomeScreenNavigationProp = NativeStackNavigationProp<
 const HomeScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation<HomeScreenNavigationProp>();
+  const todos = useSelector((state: any) => state.todoList.todos);
 
-  const goToDetail = (title: string) => {
-    dispatch(setDetailData(title));
+  const goToDetail = (id: string) => {
+    dispatch(setDetailData(id));
     navigation.navigate('HomeDetail');
   };
 
@@ -74,12 +75,12 @@ const HomeScreen = () => {
       </View>
 
       <FlatList
-        data={dummyTodos}
+        data={todos}
         keyExtractor={item => item.id}
         renderItem={({item}) => (
           <TouchableOpacity
             style={styles.taskItem}
-            onPress={() => goToDetail(item.title)}>
+            onPress={() => goToDetail(item.id)}>
             <View style={styles.iconWrapper}>
               <Icon
                 name="checkmark-done-circle"
@@ -89,10 +90,15 @@ const HomeScreen = () => {
             </View>
             <View style={styles.info}>
               <Text style={styles.taskTitle}>{item.title}</Text>
-              <Text style={styles.taskTime}>{item.time}</Text>
+              <Text style={styles.taskTime}>{item.category}</Text>
             </View>
             <Icon name="chevron-forward" size={20} color="#aaa" />
           </TouchableOpacity>
+        )}
+        ListEmptyComponent={() => (
+          <View style={{padding: 40, alignItems: 'center'}}>
+            <Text style={{color: '#aaa', fontSize: 18}}>No tasks available.</Text>
+          </View>
         )}
       />
     </View>

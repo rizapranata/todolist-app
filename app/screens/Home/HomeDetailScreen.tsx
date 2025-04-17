@@ -5,11 +5,13 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 
 const HomeDetailScreen = () => {
-  const detailData = useSelector((state: RootState) => state.todo.detailData);
+  const todo = useSelector((state: RootState) => state.todoList.detail);
+
+  console.log('todossss', todo);
 
   return (
     <View>
-      <Text>Detail: {detailData}</Text>
+      <Text>Detail: {todo?.title}</Text>
     </View>
   );
 };

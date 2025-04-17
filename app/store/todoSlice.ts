@@ -29,21 +29,7 @@ const todoSlice = createSlice({
       console.log('action result', newTodo);
       state.todos.push(newTodo);
     },
-    toggleComplete: (state, action) => {
-      const todo = state.todos.find(t => t.id === action.payload);
-      if (todo) {
-        todo.completed = !todo.completed;
-      }
-    },
-    deleteTodo: (state, action) => {
-      state.todos = state.todos.filter(t => t.id !== action.payload);
-    },
-    updateTodo: (state, action) => {
-      const index = state.todos.findIndex(t => t.id === action.payload.id);
-      if (index !== -1) {
-        state.todos[index] = action.payload;
-      }
-    },
+   
     setDetailData: (state, action) => {
       const found = state.todos.find(todo => todo.id === action.payload);
       state.detail = found ?? null;
@@ -51,6 +37,6 @@ const todoSlice = createSlice({
   },
 });
 
-export const {addTodo, toggleComplete, deleteTodo, updateTodo, setDetailData} =
+export const {addTodo, setDetailData} =
   todoSlice.actions;
 export default todoSlice.reducer;

@@ -1,97 +1,92 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+✅Berikut adalah beberapa screen yang telah dibuat
 
-# Getting Started
+![alt text](image.png) -> Home page
+![alt text](image-1.png) -> Detail todolist
+![alt text](image-2.png) -> Delete Dialog
+![alt text](image-3.png) -> Add To do
+![alt text](image-4.png) -> Update To do
+![alt text](image-5.png) -> Searching to do
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+🚀 Menjalankan Project React Native
+✅ Prasyarat
+Pastikan Amda sudah menginstal:
 
-## Step 1: Start Metro
+Node.js (disarankan versi LTS, contoh: 18.x)
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+Yarn atau npm
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+Watchman (untuk pengguna macOS)
 
-```sh
-# Using npm
-npm start
+Java Development Kit (JDK) untuk Android (disarankan JDK 11)
 
-# OR using Yarn
-yarn start
-```
+Android Studio (untuk emulator Android dan build tools)
 
-## Step 2: Build and run your app
+Xcode (hanya untuk pengguna macOS jika ingin menjalankan di iOS)
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+Cocoapods (khusus iOS)
 
-### Android
+📌 Disarankan menggunakan React Native CLI (bukan Expo) jika proyek ini dibangun dengan React Native CLI.
 
-```sh
-# Using npm
-npm run android
+🛠️ Instalasi
+bash
+Copy
+Edit
+# Clone repository
+git clone https://github.com/username/project-name.git
+cd project-name
 
-# OR using Yarn
-yarn android
-```
+# Install dependencies
+yarn install
+# atau
+npm install
+▶️ Menjalankan di Android
+bash
+Copy
+Edit
+# Jalankan Metro bundler
+npx react-native start
+Di terminal lain:
 
-### iOS
+bash
+Copy
+Edit
+# Build dan jalankan aplikasi di emulator/device Android
+npx react-native run-android
+▶️ Menjalankan di iOS (macOS only)
+bash
+Copy
+Edit
+# Install pods terlebih dahulu
+cd ios && pod install && cd ..
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+# Jalankan Metro bundler
+npx react-native start
+Di terminal lain:
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+bash
+Copy
+Edit
+# Build dan jalankan aplikasi di simulator iOS
+npx react-native run-ios
+🧯 Troubleshooting Umum
+1. ❌ error Failed to install the app. Make sure you have the Android development environment set up.
+✅ Solusi:
 
-```sh
-bundle install
-```
+Pastikan Android emulator sudah berjalan.
 
-Then, and every time you update your native dependencies, run:
+Jalankan adb devices untuk memastikan device terdeteksi.
 
-```sh
-bundle exec pod install
-```
+Jalankan ulang Metro bundler: npx react-native start --reset-cache.
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+2. ❌ Could not resolve all dependencies for configuration...
+✅ Solusi:
 
-```sh
-# Using npm
-npm run ios
+Coba jalankan:
 
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
-
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+bash
+Copy
+Edit
+cd android
+./gradlew clean
+cd ..
+npx react-native run-android

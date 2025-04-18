@@ -11,7 +11,7 @@ export interface Todo {
 
 interface TodoState {
   todos: Todo[];
-  filteredTodos: Todo[]; // <-- hasil pencarian
+  filteredTodos: Todo[];
   detail: Todo | null;
   keyword: string;
 }
@@ -34,7 +34,7 @@ const todoSlice = createSlice({
         ...action.payload,
       };
       state.todos.push(newTodo);
-      state.filteredTodos = state.todos; // update hasil filter juga
+      state.filteredTodos = state.todos;
     },
     toggleComplete: (state, action: PayloadAction<string>) => {
       const todo = state.todos.find(t => t.id === action.payload);

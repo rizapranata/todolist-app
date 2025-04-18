@@ -47,7 +47,7 @@ const HomeScreen = () => {
             paddingVertical: 20,
             marginVertical: 16,
           }}>
-          <Text style={{color: 'white'}}>Cuaca hari ini</Text>
+          <Text style={{color: 'white', fontSize: 20}}>Cuaca hari ini</Text>
         </View>
         <Text style={styles.title}>Today's Task</Text>
       </View>

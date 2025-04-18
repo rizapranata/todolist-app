@@ -8,7 +8,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {View, TouchableOpacity, Platform} from 'react-native';
 import {StyleSheet} from 'react-native';
-import WeatherNavigator from './WeatherNavigator';
+import MovieNavigator from './MovieNavigator';
 import Colors from '../constants/colors';
 
 const Tab = createBottomTabNavigator();
@@ -64,14 +64,13 @@ const RootNavigator = () => {
             tabBarButton: props => <CustomTabBarButton {...props} />,
           }}
         />
-
         <Tab.Screen
-          name="Weather"
-          component={WeatherNavigator}
+          name="Movies"
+          component={MovieNavigator}
           options={{
             tabBarIcon: ({focused}) => (
               <Icon
-                name={focused ? 'rainy' : 'rainy-outline'}
+                name={focused ? 'videocam' : 'videocam-outline'}
                 size={24}
                 color={focused ? Colors.primary : 'gray'}
               />

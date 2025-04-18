@@ -1,10 +1,10 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
-import WeatherScreen from '../screens/Weather/WeatherScreen';
+import MovieScreen from '../screens/Movie/MovieScreen';
 
 const Stack = createNativeStackNavigator();
 
-const WeatherNavigator = () => {
+const MovieNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -12,12 +12,12 @@ const WeatherNavigator = () => {
         headerShadowVisible: false,
       }}>
       <Stack.Screen
-        name="WeatherScreen"
-        options={{title: 'Weather Screen'}}
-        component={WeatherScreen}
+        name="MovieScreen"
+        options={{title: 'Movie Screen'}}
+        component={MovieScreen}
       />
     </Stack.Navigator>
   );
 };
 
-export default WeatherNavigator;
+export default MovieNavigator;

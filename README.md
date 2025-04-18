@@ -1,11 +1,13 @@
 ✅Berikut adalah beberapa screen yang telah dibuat
 
-![alt text](image.png) -> Home page
+![alt text](image-8.png) -> Home page
 ![alt text](image-1.png) -> Detail todolist
 ![alt text](image-2.png) -> Delete Dialog
 ![alt text](image-3.png) -> Add To do
 ![alt text](image-4.png) -> Update To do
 ![alt text](image-5.png) -> Searching to do
+![alt text](image-6.png) -> Movie Screen (masih ada issue belum berhasil mendapatkan data api public)
+![alt text](image-7.png) -> Provile Screen
 
 🚀 Menjalankan Project React Native
 ✅ Prasyarat

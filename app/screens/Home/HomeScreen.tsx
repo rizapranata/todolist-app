@@ -39,16 +39,6 @@ const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <View
-          style={{
-            backgroundColor: Colors.primary,
-            padding: 16,
-            borderRadius: 16,
-            paddingVertical: 20,
-            marginVertical: 16,
-          }}>
-          <Text style={{color: 'white', fontSize: 20}}>Cuaca hari ini</Text>
-        </View>
         <Text style={styles.title}>Today's Task</Text>
       </View>
       <View style={{flex: 1}}>
